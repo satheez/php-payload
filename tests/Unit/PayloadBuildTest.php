@@ -7,8 +7,7 @@ use Php\Data\Payload;
 
 class PayloadBuildTest extends \PHPUnit\Framework\TestCase
 {
-    /** @test */
-    public function can_add_data_to_payload_class()
+    public function test_can_add_data_to_payload_class()
     {
         $payload = new Payload;
         $payload->add('animal.dog.name', 'Zoe');
@@ -17,29 +16,27 @@ class PayloadBuildTest extends \PHPUnit\Framework\TestCase
         $payload->add('animal.cat.name', 'Snowy');
         $payload->add('animal.cat.age', 2);
 
-        $this->assertSame($payload->get('animal.dog.name'), 'Zoe');
-        $this->assertSame($payload->get('animal.dog.age'), 8);
+        $this->assertSame('Zoe', $payload->get('animal.dog.name'));
+        $this->assertSame(8, $payload->get('animal.dog.age'));
 
-        $this->assertSame($payload->get('animal.cat.name'), 'Snowy');
-        $this->assertSame($payload->get('animal.cat.age'), 2);
+        $this->assertSame('Snowy', $payload->get('animal.cat.name'));
+        $this->assertSame(2, $payload->get('animal.cat.age'));
     }
 
-     /** @test */
-    public function can_retrieve_data_from_payload_class()
+    public function test_can_retrieve_data_from_payload_class()
     {
         $payload = $this->prepareTestPayload();
-        $this->assertSame(count($payload->get('month')), 12);
-        $this->assertSame($payload->get('month.jan'), 'January');
-        $this->assertSame($payload->get('month.feb'), 'February');
-        $this->assertNotSame($payload->get('month.mar'), 'February');
-        $this->assertSame($payload->get('month.na', 'N/A'), 'N/A');
+        $this->assertSame(12, count($payload->get('month')));
+        $this->assertSame('January', $payload->get('month.jan'));
+        $this->assertSame('February', $payload->get('month.feb'));
+        $this->assertNotSame('February', $payload->get('month.mar'));
+        $this->assertSame('N/A', $payload->get('month.na', 'N/A'));
 
         $this->assertIsArray($payload->get('contacts'));
-        $this->assertSame(count($payload->get('contacts')), 5);
+        $this->assertSame(5, count($payload->get('contacts')));
     }
 
-    /** @test */
-    public function can_export_data_to_payload_class()
+    public function test_can_export_data_to_payload_class()
     {
         $payload = $this->prepareTestPayload();
 
@@ -49,11 +46,10 @@ class PayloadBuildTest extends \PHPUnit\Framework\TestCase
         $this->assertIsArray($data['number']);
         $this->assertIsArray($data['contacts']);
 
-        $this->assertSame($data['month']['feb'], 'February');
+        $this->assertSame('February', $data['month']['feb']);
     }
 
-      /** @test */
-    public function can_export_and_import_data_to_payload_class()
+    public function test_can_export_and_import_data_to_payload_class()
     {
         $payload1 = $this->prepareTestPayload();
         $data = $payload1->export();

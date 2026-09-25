@@ -10,7 +10,7 @@ final class Payload
     /**
      * @param array|null $data
      */
-    public function __construct(array $data = null)
+    public function __construct(?array $data = null)
     {
         $this->container = [ 'data' => $data ?? [], ];
     }
