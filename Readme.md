@@ -1,6 +1,10 @@
 # PHP Payload data class
 You can build data with any format, extract and send to any other server. Then can rebuild and retrieve by exactly the data key that was being used to build it without any issues
 
+### Requirements
+
+PHP 8.2 or newer.
+
 ### Installation
 
 You can pull the package via composer :
@@ -38,5 +42,5 @@ $dog = $payload1->get('animal.dog.name'); // Zoe
 ### Testing
 
 ```sh
-> ./vendor/bin/phpunit tests
+composer test
 ```
